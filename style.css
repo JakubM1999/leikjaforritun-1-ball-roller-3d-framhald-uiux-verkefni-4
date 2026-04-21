@@ -1,0 +1,398 @@
+:root {
+    --blueprint-blue: #004d80; /* Deeper technical blue for better contrast */
+    --blueprint-line: #eef2f5; 
+    --blueprint-grid: rgba(238, 242, 245, 0.15);
+    --ps1-yellow: var(--blueprint-line);
+    --ps1-pink: var(--blueprint-line);
+    --ps1-green: var(--blueprint-line);
+    --ps1-blue: transparent;
+    --ps1-bg: var(--blueprint-blue);
+    --ps1-ui-bg: rgba(255, 255, 255, 0.1); 
+    --ps1-border: 1px solid rgba(238, 242, 245, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    image-rendering: pixelated;
+}
+
+h1, .label, .hud-btn, .nav-btn {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+}
+
+body {
+    background: var(--ps1-bg);
+    background-image: 
+        repeating-radial-gradient(rgba(255,255,255,0.05) 0px, transparent 1px, transparent 100%),
+        linear-gradient(var(--blueprint-grid) 2px, transparent 2px),
+        linear-gradient(90deg, var(--blueprint-grid) 2px, transparent 2px),
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 3px 3px, 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    color: var(--blueprint-line);
+}
+
+/* Mission Log Sidebar */
+.mission-log {
+    position: absolute;
+    top: 50%; left: 25px;
+    transform: translateY(-50%);
+    width: 260px;
+    background: rgba(255, 255, 255, 0.1); /* Slightly more visible */
+    border-left: 3px solid var(--blueprint-line);
+    padding: 20px;
+    z-index: 10;
+    font-size: 11px;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+}
+
+.log-header {
+    font-weight: 900;
+    margin-bottom: 18px;
+    color: var(--blueprint-line); /* High contrast */
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 8px;
+}
+
+.log-item {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--blueprint-line);
+    opacity: 0.9; /* Higher default opacity */
+    transition: opacity 0.2s;
+}
+
+.log-item:hover {
+    opacity: 1;
+}
+
+.log-item input[type="checkbox"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--blueprint-line);
+    margin-right: 12px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.log-item input[type="checkbox"]:checked {
+    background: var(--blueprint-line);
+}
+
+.log-item input[type="checkbox"]:checked::after {
+    content: "L"; /* Technical 'check' look */
+    position: absolute;
+    top: -2px; left: 3px;
+    color: var(--blueprint-blue);
+    transform: rotate(45deg) scaleX(-1);
+    font-weight: bold;
+}
+
+.log-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+#three-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+}
+
+/* Paper Fold Effect Overlay */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 49.9%, rgba(255,255,255,0.08) 50%, transparent 50.1%),
+        linear-gradient(0deg, transparent 49.9%, rgba(255,255,255,0.08) 50%, transparent 50.1%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Drafting Title Block */
+.title-block {
+    position: absolute;
+    bottom: 20px; right: 20px;
+    width: 420px;
+    border: 1px solid var(--blueprint-line);
+    background: var(--ps1-ui-bg);
+    z-index: 15;
+    font-size: 10px;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+}
+
+.block-row {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.block-row:last-child { border-bottom: none; }
+
+.block-cell {
+    padding: 10px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    flex: 1;
+}
+
+.block-cell:last-child { border-right: none; }
+.header-cell { padding: 12px; font-weight: bold; background: rgba(255,255,255,0.05); font-size: 11px; letter-spacing: 2px; text-align: center; border-right: none; }
+
+/* Dimension Lines */
+.dimension-line {
+    position: absolute;
+    background: rgba(255,255,255,0.4);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.dimension-line span {
+    position: absolute;
+    background: var(--blueprint-blue);
+    padding: 0 8px;
+    font-size: 10px;
+    color: var(--blueprint-line);
+    font-weight: bold;
+}
+
+.dimension-line.horiz { height: 1px; }
+.dimension-line.horiz::before, .dimension-line.horiz::after {
+    content: "";
+    position: absolute;
+    top: -5px; width: 1px; height: 11px;
+    background: var(--blueprint-line);
+}
+.dimension-line.horiz::before { left: 0; }
+.dimension-line.horiz::after { right: 0; }
+.dimension-line.horiz span { top: -7px; left: 50%; transform: translateX(-50%); }
+
+.dimension-line.vert { width: 1px; }
+.dimension-line.vert::before, .dimension-line.vert::after {
+    content: "";
+    position: absolute;
+    left: -5px; width: 11px; height: 1px;
+    background: var(--blueprint-line);
+}
+.dimension-line.vert::before { top: 0; }
+.dimension-line.vert::after { bottom: 0; }
+.dimension-line.vert span { left: -35px; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: top left; }
+
+/* Technical HUD Brackets & Polish */
+.hud-corner {
+    position: absolute;
+    padding: 18px;
+    background: var(--ps1-ui-bg);
+    border: 1px solid rgba(255,255,255,0.2);
+    z-index: 10;
+    backdrop-filter: blur(4px);
+}
+
+.hud-corner::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 15px; height: 15px;
+    border-top: 2px solid var(--blueprint-line);
+    border-left: 2px solid var(--blueprint-line);
+}
+
+.hud-corner::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 15px; height: 15px;
+    border-bottom: 2px solid var(--blueprint-line);
+    border-right: 2px solid var(--blueprint-line);
+}
+
+.top-left { top: 25px; left: 25px; }
+.top-right { top: 25px; right: 25px; text-align: right; }
+.bottom-left { bottom: 25px; left: 25px; }
+
+.top-left::before { content: "REF_0.0_1.0"; position: absolute; top: -18px; left: 0; font-size: 9px; opacity: 0.7; border: none; }
+.top-right::before { content: "REF_1.0_1.0"; position: absolute; top: -18px; right: 0; font-size: 9px; opacity: 0.7; border: none; }
+.bottom-left::before { content: "REF_0.0_0.0"; position: absolute; bottom: -18px; left: 0; font-size: 9px; opacity: 0.7; border: none; }
+
+.label { font-size: 11px; opacity: 0.8; text-transform: uppercase; margin-bottom: 4px; display: block; font-weight: bold; }
+.value { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+
+.health-bar {
+    width: 200px;
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.4);
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.health-bar::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+    background-size: 20px 100%; 
+    opacity: 0.3;
+}
+
+.health-fill {
+    height: 100%;
+    background: var(--blueprint-line);
+}
+
+.hud-icon {
+    width: 36px;
+    height: 36px;
+    filter: brightness(0) invert(1) opacity(0.8); 
+}
+
+/* Central Menu */
+.center-menu {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12vh 0 18vh 0;
+    text-align: center;
+    pointer-events: none;
+}
+
+.menu-header { pointer-events: auto; }
+.menu-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 5.5rem;
+    line-height: 0.85;
+    color: var(--blueprint-line);
+    margin-bottom: 10px;
+}
+
+.menu-header p {
+    font-size: 1.3rem;
+    letter-spacing: 6px;
+    opacity: 0.7;
+}
+
+.menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    pointer-events: auto;
+}
+
+.hud-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--blueprint-line);
+    color: var(--blueprint-line);
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.hud-btn:hover {
+    background: var(--blueprint-line);
+    color: var(--blueprint-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Window Content */
+.slide-window {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 950px;
+    max-height: 85vh; /* Use max-height instead of fixed height */
+    background: rgba(0, 70, 130, 0.9); /* Consistent deep blueprint blue */
+    border: 1px solid var(--blueprint-line);
+    padding: 0; /* Remove padding from container to allow scroll to edges */
+    z-index: 20;
+    display: none;
+    box-shadow: 0 0 50px rgba(0,0,0,0.3);
+    backdrop-filter: blur(15px);
+    overflow: hidden; /* Hide outer overflow */
+}
+
+.slides {
+    padding: 40px;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scroll for long slides */
+    scrollbar-width: thin;
+    scrollbar-color: var(--blueprint-line) transparent;
+}
+
+.slides::-webkit-scrollbar { width: 6px; }
+.slides::-webkit-scrollbar-thumb { background: var(--blueprint-line); }
+
+.slide-window.active { display: flex; flex-direction: column; }
+
+.slide { display: none; width: 100%; }
+.slide.active { display: block; }
+
+.close-btn {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: transparent;
+    border: 1px solid var(--blueprint-line);
+    color: var(--blueprint-line);
+    width: 35px; height: 35px;
+    cursor: pointer;
+    z-index: 25;
+}
+
+h1 { font-size: 2.5rem; border-bottom: 2px solid rgba(255,255,255,0.2); margin-bottom: 20px; padding-bottom: 10px; font-weight: 900; text-transform: uppercase; }
+h2 { font-size: 1.6rem; margin-bottom: 15px; opacity: 0.9; font-weight: bold; border-left: 4px solid var(--blueprint-line); padding-left: 15px; }
+p, li { font-size: 1.1rem; line-height: 1.6; margin-bottom: 15px; }
+
+ul, ol { padding-left: 25px; margin-bottom: 20px; }
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.1);
+}
+
+.nav-btn {
+    background: transparent;
+    color: var(--blueprint-line);
+    border: 1px solid var(--blueprint-line);
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+pre {
+    background: rgba(0,0,0,0.2);
+    border: 1px dashed rgba(255,255,255,0.3);
+    padding: 20px;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    margin: 20px 0;
+    white-space: pre-wrap; /* Wrap long lines */
+    word-break: break-all;
+}
