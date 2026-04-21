@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <!-- Mission Log (Checklist) -->
+    <!-- Mission Log (Interactive Checklist) -->
     <div class="mission-log">
         <div class="log-header">MISSION_LOG // STATUS</div>
         <label class="log-item"><input type="checkbox"> <span>MAIN_MENU_SYSTEM</span></label>
@@ -62,7 +62,7 @@
     <div class="title-block">
         <div class="block-row">
             <div class="block-cell" style="flex: 2;">PROJECT: <strong>3D_BALL_ROLLER_REMASTER</strong></div>
-            <div class="block-cell">REV: <strong>04.I</strong></div>
+            <div class="block-cell">REV: <strong>04.K</strong></div>
         </div>
         <div class="block-row">
             <div class="block-cell">SCALE: <strong>1:1.25</strong></div>
@@ -97,37 +97,71 @@
         <div class="slides" id="intro-slides">
             <section class="slide active">
                 <h1>01 // FRÁ PRÓTÓTÝPU Í LEIK</h1>
-                <p>Hingað til höfum við smíðað <strong>vélbúnaðinn</strong> (mechanics). Þetta er prótótýpa, en hún "talar" ekki við spilarann ennþá.</p>
+                <p>Hingað til höfum við smíðað <strong>vélbúnaðinn</strong> (mechanics): Boltinn rúllar, peningar hverfa og borðið er til staðar. Þetta er prótótýpa, en hún "talar" ekki við spilarann ennþá.</p>
                 <br>
                 <p><strong>Munurinn er svörun (Feedback):</strong> Í alvöru leik á spilarinn aldrei að vera í vafa um hvort eitthvað hafi gerst. Ef boltinn hoppar, viljum við heyra kraftinn. Ef við fáum stig, viljum við sjá HUD-ið breytast strax.</p>
+                <br>
+                <div class="icon-text" style="display:flex; gap:15px; align-items:center; background:rgba(255,255,255,0.05); padding:15px; border-left: 4px solid var(--blueprint-line);">
+                    <img src="images/icons/Tools.svg" style="width:40px;">
+                    <p><em>Markmiðið í dag: Við ætlum að "tengja" leikinn við spilarann svo hann finni fyrir hverri einustu hreyfingu.</em></p>
+                </div>
             </section>
+            
             <section class="slide">
                 <h2>02 // UX OG SKÝRLEIKI</h2>
-                <p>UX snýst um að leiðbeina spilaranum með <strong>Sjónrænu stigveldi</strong>.</p>
+                <p>UX snýst um að leiðbeina spilaranum án þess að nota orð. Við notum <strong>Sjónrænt stigveldi</strong> (Visual Hierarchy) til að stýra því hvert spilarinn horfir.</p>
+                <br>
                 <ul>
-                    <li><strong>Mikilvægt UI:</strong> Peningar og tími eiga að vera skýr en ekki í veginum fyrir boltanum.</li>
-                    <li><strong>Staða:</strong> Notaðu liti (t.d. rauðan) ef eitthvað er að fara úrskeiðis (tíminn að renna út).</li>
+                    <li><strong>Mikilvægt UI:</strong> Peningar og tími eiga að vera skýr en í hornunum svo þeir trufli ekki boltann.</li>
+                    <li><strong>Staða:</strong> Ef tíminn er að renna út, getum við látið HUD-ið blikka rauðu til að búa til spennu.</li>
                 </ul>
+                <br>
+                <p><strong>Dæmi úr verkefni:</strong> Hraðamælirinn (Velocity) á að vera sýnilegur en ekki yfirgnæfandi. Hann hjálpar spilaranum að meta hvort hann komist yfir stór stökk.</p>
             </section>
+
             <section class="slide">
                 <h2>03 // HLJÓÐ SEM STAÐFESTING</h2>
-                <p>Hljóð gefur hlutum "þyngd" og massa. SFX er fljótlegasta leiðin til að staðfesta árangur (pling!) eða mistök (dunk!).</p>
+                <p>Hljóð er fljótlegasta leiðin til að láta spilarann vita að eitthvað hafi gerst. Það gefur hlutum einnig "þyngd" og massa í 3D heiminum.</p>
+                <br>
+                <ul>
+                    <li><strong>SFX (Sound Effects):</strong> Bjartur "pling" þegar þú færð pening er staðfesting á árangri. Þungt "dunk" þegar boltinn lendir hart.</li>
+                    <li><strong>BGM (Background Music):</strong> Setur taktinn í leikinn. Hröð tónlist lætur spilarann reyna að klára borðið hraðar.</li>
+                </ul>
             </section>
+
             <section class="slide">
                 <h2>04 // SAFI OG GAME FEEL (JUICE)</h2>
-                <p>Safi er óþarfa dýnamík sem gerir allt skemmtilegra. Squash & Stretch, Screen Shake og Particles gefa leiknum líf.</p>
+                <p>"Safi" (Juice) er öll þessi litlu áhrif sem gera ekkert fyrir virkni leiksins, en gera <strong>allt</strong> fyrir upplifunina. Þetta er munurinn á því að "ýta á takka" og því að "gefa leiknum líf".</p>
+                <br>
+                <ul>
+                    <li><strong>Squash & Stretch:</strong> Boltinn á ekki bara að rúlla; láttu hann "pressast" saman þegar hann lendir eða teygjast þegar hann hoppar.</li>
+                    <li><strong>Screen Shake:</strong> Ekki bara spila hljóð þegar boltinn klessir á vegg, láttu myndavélina hristast stuttlega.</li>
+                </ul>
             </section>
+
             <section class="slide">
                 <h2>05 // TÆKNILEGUR GRUNNUR</h2>
-                <p>Við notum <strong>Signals</strong> og <strong>Containers</strong> til að halda kóðanum hreinum svo UI-ið brotni ekki þegar þú breytir leiknum.</p>
+                <p>Góður leikur þarf vera auðveldur í breytingum. Við notum <strong>Signals</strong> og <strong>Containers</strong> til að halda kóðanum hreinum og sveigjanlegum.</p>
+                <br>
+                <ul>
+                    <li><strong>Decoupling (Aðskilnaður):</strong> Boltinn á ekki að vita að UI-ið sé til. Hann á bara að senda út merki (Signal) þegar hann fær pening.</li>
+                    <li><strong>Containers:</strong> Notaðu VBox og HBox svo UI-ið brotni ekki þegar þú breytir stærð gluggans.</li>
+                </ul>
             </section>
+
             <section class="slide">
                 <h2>06 // LOKASKREFIÐ: DEMO ÚTGÁFA</h2>
-                <p>Þú átt að skila <strong>öllu verkefninu</strong> og einni export-aðri .exe skrá til að sýna að leikurinn virki utan Godot.</p>
+                <p>Leikur er ekki búinn fyrr en hann er kominn út úr editor-num. Í lok vikunnar áttu að skila fullbúnu verkefni.</p>
+                <br>
+                <ul>
+                    <li><strong>Skil:</strong> Þú átt að skila <strong>öllu verkefnamöppunni</strong> (.gd og .tscn skrár) svo ég geti séð hvernig þú vannst.</li>
+                    <li><strong>Demo Build:</strong> Export-aðu leikinn í .exe til að ganga úr skugga um að hann virki í raunverulegri spilun hjá öðrum.</li>
+                </ul>
             </section>
+
             <section class="slide">
                 <h2>07 // BLUEPRINT HUGAFAR</h2>
-                <p>Pússaðu tæknilegu útfærsluna þar til hún er fullkomin. Spyrðu þig: "Hvernig get ég látið þetta líða 10% betur?"</p>
+                <p>Pússaðu tæknilegu útfærsluna þar til hún er fullkomin. Spyrðu þig: "Hvernig get ég látið þetta líða 10% betur?" Gangi ykkur vel!</p>
             </section>
         </div>
         <div class="controls">
@@ -142,97 +176,98 @@
         <button class="close-btn" onclick="closeWindow('guide-window')">X</button>
         <div class="slides" id="guide-slides">
             
-            <!-- Slide 1: MAIN_MENU_SYSTEM -->
+            <!-- Task 1: MAIN_MENU_SYSTEM -->
             <section class="slide active">
-                <h2>01 // MAIN_MENU_SYSTEM</h2>
-                <p>Valmyndin er það fyrsta sem spilarinn sér. Hún á að vera alveg sér sena (User Interface sena) sem leyfir okkur að stilla allt áður en leikurinn byrjar.</p>
+                <h2><img src="images/icons/Control.svg" style="width:32px;"> 01 // MAIN_MENU_SYSTEM</h2>
+                <p>Valmyndin á að vera fyrsta senan sem keyrir þegar leikurinn opnast. Hún er sér sena (User Interface) sem heldur leiknum skipulögðum.</p>
                 <br>
                 <h3>1. Uppsetning í Editor:</h3>
                 <ul>
-                    <li>Búðu til nýja senu með <code>Control</code> sem rót.</li>
-                    <li>Bættu við <code>VBoxContainer</code> og settu Anchors í "Center".</li>
+                    <li>Búðu til nýja senu með <strong><img src="images/icons/Control.svg" class="icon-inline"> Control</strong> sem rót.</li>
+                    <li>Bættu við <strong><img src="images/icons/PackedScene.svg" class="icon-inline"> VBoxContainer</strong>. Í Inspector, undir <i>Layout</i>, settu <b>Anchors</b> í "Center".</li>
                     <li>Settu <code>Button</code> node inn í containerinn og skírðu hann "StartButton".</li>
                 </ul>
                 <br>
-                <h3>2. Kóði fyrir senu-skipti:</h3>
-                <p>Við notum <code>get_tree()</code> til að skipta yfir í leikborðið þegar ýtt er á takkann.</p>
+                <h3>2. Kóðun á virkni:</h3>
+                <p>Við þurfum að segja Godot að skipta um senu þegar ýtt er á takkann. Attach-aðu <img src="images/icons/Script.svg" class="icon-inline"> Script á Control rótina.</p>
                 <pre><code># menu.gd
 func _on_start_button_pressed():
-    # Skiptum yfir í aðalborðið
+    # Notaðu nákvæma slóð að leikborðinu þínu
     get_tree().change_scene_to_file("res://levels/level_01.tscn")</code></pre>
-                <p><em>Ráð: Notaðu <strong>Theme</strong> á Control node-ið til að breyta öllum tökkunum í einu.</em></p>
             </section>
 
-            <!-- Slide 2: HUD_ARCHITECTURE & LIVE_DATA -->
+            <!-- Task 2: HUD_ARCHITECTURE & LIVE_DATA -->
             <section class="slide">
-                <h2>02 // HUD_LIVE_DATA</h2>
-                <p>Til að HUD-ið virki vel þarf það að vera sjálfstætt og geta tekið við gögnum frá boltanum án þess að leikurinn krakki.</p>
+                <h2><img src="images/icons/CanvasLayer.svg" style="width:32px;"> 02 // HUD_LIVE_DATA</h2>
+                <p>Til að HUD-ið (Heads-Up Display) "límist" við skjáinn og hreyfist ekki með boltanum, notum við <strong>CanvasLayer</strong>.</p>
                 <br>
-                <h3>1. Strúktúr (Architecture):</h3>
-                <ol>
-                    <li>Búðu til nýja senu með <code>CanvasLayer</code> sem rót og vistaðu sem <code>hud.tscn</code>.</li>
-                    <li>Settu Labels og ProgressBars inn í hana.</li>
-                    <li>Opnaðu <code>player.tscn</code> og dragðu <code>hud.tscn</code> inn sem barn af Player (eða Camera).</li>
-                </ol>
+                <h3>1. Strúktúr (Sjálfstæð sena):</h3>
+                <p>Búðu til nýja senu með <strong><img src="images/icons/CanvasLayer.svg" class="icon-inline"> CanvasLayer</strong> sem rót. Vistaðu sem <code>hud.tscn</code>. Bættu við <img src="images/icons/Label.svg" class="icon-inline"> Labels fyrir stig.</p>
                 <br>
-                <h3>2. Samskipti (Signals):</h3>
-                <p>Láttu boltann senda frá sér gögnin þegar þau breytast.</p>
-                <div class="code-pair">
-                    <p><strong>player.gd</strong></p>
-                    <pre><code>signal coin_collected(total)
+                <h3>2. Tenging við Leikmanninn:</h3>
+                <p>Opnaðu <code>player.tscn</code>. Smelltu á <strong><img src="images/icons/Instance.svg" class="icon-inline"> Instantiate</strong> og veldu <code>hud.tscn</code>. Nú fylgir viðmótið alltaf leikmanninum.</p>
+                <br>
+                <h3>3. Samskipti með Signals:</h3>
+                <p>Notaðu signals til að senda gögnin frá Boltanum yfir í HUD-ið.</p>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <p><strong><img src="images/icons/RigidBody3D.svg" class="icon-inline"> player.gd</strong></p>
+                        <pre><code>signal coin_collected(total)
 
 func collect():
     score += 1
     coin_collected.emit(score)</code></pre>
-                </div>
-                <div class="code-pair">
-                    <p><strong>hud.gd</strong></p>
-                    <pre><code># Tengdu signalið frá Player
-func _on_player_coin_collected(total):
-    $CoinLabel.text = "COINS: " + str(total)</code></pre>
+                    </div>
+                    <div>
+                        <p><strong><img src="images/icons/CanvasLayer.svg" class="icon-inline"> hud.gd</strong></p>
+                        <pre><code>func _on_player_coin_collected(total):
+    $ScoreLabel.text = "STIG: " + str(total)</code></pre>
+                    </div>
                 </div>
             </section>
 
-            <!-- Slide 3: AUDIO_BUS_CONFIG -->
+            <!-- Task 3: AUDIO_BUS_CONFIG & MIXING -->
             <section class="slide">
-                <h2>03 // AUDIO_BUS_CONFIG</h2>
-                <p>Hljóð í leikjum þarf að vera skipulagt í rásir. Þannig getur spilarinn t.d. lækkað í tónlist en ennþá heyrt peningahljóðin.</p>
+                <h2><img src="images/icons/AudioStreamPlayer.svg" style="width:32px;"> 03 // AUDIO_BUS_CONFIG & MIXING</h2>
+                <p>Hljóð í leikjum þarf að vera skipulagt í rásir (Buses). Þannig getur spilarinn lækkað í tónlist en ennþá heyrt hljóðeffekta.</p>
                 <br>
-                <h3>Skref fyrir skref:</h3>
+                <h3>1. Mixer Uppsetning:</h3>
                 <ol>
-                    <li>Opnaðu <strong>Audio</strong> flipann (neðst í Godot, hjá Output).</li>
-                    <li>Smelltu á <strong>Add Bus</strong> og búðu til tvær rásir: <code>Music</code> og <code>SFX</code>.</li>
-                    <li>Settu <code>AudioStreamPlayer</code> nóðurnar þínar á réttar rásir í Inspector-num (Bus property).</li>
+                    <li>Opnaðu <strong>Audio</strong> flipann neðst í Godot editor-num.</li>
+                    <li>Smelltu á <strong>Add Bus</strong> og búðu til rásirnar <code>Music</code> og <code>SFX</code>.</li>
+                    <li><strong>Bus Effects:</strong> Smelltu á "Add Effect" á SFX rásinni og veldu <strong>Reverb</strong>. Þetta lætur hljóðin berma eins og þau séu í 3D rými.</li>
                 </ol>
                 <br>
-                <p><em>Af hverju? Í alvöru leikjum viltu kanski hafa Master í 0dB en Music í -15dB svo hún sé bara í bakgrunninum.</em></p>
+                <h3>2. Routing (Hvernig á að tengja):</h3>
+                <p>Veldu <strong><img src="images/icons/AudioStreamPlayer.svg" class="icon-inline"> AudioStreamPlayer</strong> nóðuna þína. Í <b>Inspector</b> hægra megin, finndu eiginleikann <strong>Bus</strong>. Skiptu honum úr "Master" yfir í "SFX" eða "Music".</p>
+                <p><em>Nú munu öll hljóð á þeirri nóðu sjálfkrafa fara í gegnum mixerinn þinn!</em></p>
             </section>
 
-            <!-- Slide 4: SFX_RANDOMIZATION -->
+            <!-- Task 4: SFX_RANDOMIZATION & POLYPHONY -->
             <section class="slide">
-                <h2>04 // SFX_RANDOMIZATION</h2>
-                <p>Pússun (Polish) snýst um að fjarlægja "vélræna" tilfinningu. Ef hljóð er alltaf eins verður það fljótt leiðinlegt.</p>
+                <h2><img src="images/icons/Tools.svg" style="width:32px;"> 04 // SFX_RANDOMIZATION & LOGIC</h2>
+                <p>Til að peningahljóð eða hopp verði ekki leiðinleg, notum við kóða til að gera þau dýnamísk.</p>
                 <br>
-                <h3>Kóði fyrir dýnamískt hljóð:</h3>
-                <p>Við breytum <code>pitch_scale</code> (tónhæð) örlítið í hvert skipti sem hljóðið spilar.</p>
-                <pre><code># player.gd eða coin.gd
-func play_sfx():
-    # 1.0 er eðlilegt hljóð. 
-    # Veljum tölu á bilinu 0.9 (dýpra) til 1.1 (bjartara).
+                <h3>1. Fjölbreytni (Pitch):</h3>
+                <p>Attach-aðu <img src="images/icons/Script.svg" class="icon-inline"> Script við hlutinn sem spilar hljóðið og breyttu tónhæðinni í hvert skipti.</p>
+                <pre><code>func play_sfx():
+    # Random pitch á bilinu 0.9 (dýpra) til 1.1 (bjartara)
     $JumpSound.pitch_scale = randf_range(0.9, 1.1)
     $JumpSound.play()</code></pre>
-                <p><em>Þetta lætur hvert hopp eða pening hljóma örlítið öðruvísi og gefur leiknum líf.</em></p>
+                <br>
+                <h3>2. Polyphony (Skörun):</h3>
+                <p>Ef þú safnar mörgum peningum í einu, viltu heyra öll hljóðin. Veldu <strong><img src="images/icons/AudioStreamPlayer.svg" class="icon-inline"> AudioStreamPlayer</strong> nóðuna og í Inspector breyttu <strong>Max Polyphony</strong> í t.d. 4. Þá getur sama nóðan spilað 4 hljóð í einu án þess að klippa á þau.</p>
             </section>
 
-            <!-- Slide 5: SCREEN_SHAKE_LOGIC -->
+            <!-- Task 5: SCREEN_SHAKE_LOGIC -->
             <section class="slide">
-                <h2>05 // SCREEN_SHAKE_LOGIC</h2>
+                <h2><img src="images/icons/Camera3D.svg" style="width:32px;"> 05 // SCREEN_SHAKE_LOGIC</h2>
                 <p>Screen shake gefur árekstrum og krafti "vigt". Í 3D gerum við þetta með því að hliðra myndavélinni (offset) hratt fram og til baka með Tweens.</p>
                 <br>
-                <h3>Kóði í camera.gd:</h3>
+                <h3>Kóði í <img src="images/icons/Script.svg" class="icon-inline"> camera.gd:</h3>
                 <pre><code>func apply_shake(power):
     var t = create_tween()
-    # Hristum offset-ið hratt 4-5 sinnum
+    # Hristum offset-ið hratt 4 sinnum með slembi-gildum
     for i in 4:
         var offset = Vector2(randf_range(-power, power), randf_range(-power, power))
         t.tween_property(self, "h_offset", offset.x, 0.02)
@@ -242,33 +277,32 @@ func play_sfx():
     t.tween_property(self, "h_offset", 0, 0.05)</code></pre>
             </section>
 
-            <!-- Slide 6: EXPORT_DEMO_BUILD -->
+            <!-- Task 6: EXPORT_DEMO_BUILD -->
             <section class="slide">
-                <h2>06 // EXPORT_DEMO_BUILD</h2>
-                <p>Að búa til "Build" er mikilvægt. Það gerir leikinn keyranlegan á tölvum sem eru ekki með Godot.</p>
+                <h2><img src="images/icons/MainPlay.svg" style="width:32px;"> 06 // EXPORT_DEMO_BUILD</h2>
+                <p>Leikur á að geta keyrt sjálfstætt. Við búum til <b>Export</b> til að prófa leikinn eins og alvöru spilari.</p>
                 <br>
                 <h3>Leiðbeiningar:</h3>
                 <ol>
                     <li>Farðu í <strong>Project -> Export</strong> efst í vinstra horninu.</li>
                     <li>Smelltu á <strong>Add...</strong> og veldu <code>Windows Desktop</code>.</li>
-                    <li>Ef sniðmát (templates) vantar, halaðu þeim niður í gegnum linkinn sem Godot sýnir.</li>
-                    <li>Smelltu á <strong>Export Project</strong> og vistaðu .exe skrána í nýja möppu (t.d. "build").</li>
+                    <li>Ef þú sérð "Missing templates" link, halaðu þeim niður (þetta tekur smá tíma).</li>
+                    <li>Veldu möppu, skírðu skrána og smelltu á <strong>Export Project</strong>.</li>
                 </ol>
-                <p><em>Prófaðu að keyra .exe skrána sjálf(ur) áður en þú skilar til að finna villur!</em></p>
+                <p><em>Prófaðu að keyra .exe skrána sjálf(ur) og gáðu hvort allt virki rétt!</em></p>
             </section>
 
-            <!-- Slide 7: PROJECT_FILES_ZIPPED -->
+            <!-- Task 7: PROJECT_FILES_ZIPPED -->
             <section class="slide">
-                <h2>07 // PROJECT_FILES_ZIPPED</h2>
-                <p>Ég þarf að fá allar skrárnar þínar (skriftur, senur, myndir) til að fara yfir verkefnið. Ekki senda bara .exe skrána!</p>
+                <h2><img src="images/icons/Save.svg" style="width:32px;"> 07 // PROJECT_FILES_ZIPPED</h2>
+                <p>Til að ég geti gefið einkunn þarf ég að fá <strong>allar skrárnar</strong> þínar. Ekki senda bara .exe skrána!</p>
                 <br>
-                <h3>Hvernig á að skila:</h3>
-                <ol>
-                    <li>Lokaðu Godot editor-num alveg.</li>
-                    <li>Farðu í möppuna þar sem verkefnið þitt er geymt (þar sem <code>project.godot</code> liggur).</li>
-                    <li>Hægrismelltu á aðalmöppuna og veldu <strong>Compress to ZIP file</strong>.</li>
-                    <li>Skírðu ZIP skrána nafni þínu (t.d. <code>Nafn_Verkefni4.zip</code>).</li>
-                </ol>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-left: 4px solid white;">
+                    <p><strong>1.</strong> Lokaðu Godot editor-num alveg.</p>
+                    <p><strong>2.</strong> Farðu í möppuna þar sem verkefnið þitt er geymt (þar sem <code>project.godot</code> liggur).</p>
+                    <p><strong>3.</strong> Hægrismelltu á aðalmöppuna og veldu <strong>Compress to ZIP file</strong>.</p>
+                    <p><strong>4.</strong> ZIP skráin á að innihalda allar <code>.gd</code> og <code>.tscn</code> skrárnar þínar.</p>
+                </div>
             </section>
 
             <!-- Slide 8: SUMMARY -->
@@ -276,9 +310,7 @@ func play_sfx():
                 <h2>// TILBÚIÐ TIL SKILA?</h2>
                 <p>Ef þú hefur farið í gegnum alla þessa liði, til hamingju! Þú hefur remaster-að prótótýpuna þína yfir í vandaðan leik.</p>
                 <br>
-                <p>Gættu þess að allt virki vel saman og að "safi" og hljóð geri upplifunina skemmtilega.</p>
-                <br>
-                <p>Gangi ykkur vel með lokaskilin!</p>
+                <p>Gættu þess að allt virki vel saman og að "safi" og hljóð geri upplifunina skemmtilega. Gangi ykkur vel!</p>
             </section>
         </div>
         <div class="controls">
